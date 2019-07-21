@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{a2dce063-cfce-4a4a-93e5-90d031ed8486}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Input">
+      <UniqueIdentifier>{34772da0-c3bd-41ff-94c4-4209503cadbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object">
+      <UniqueIdentifier>{e85276fe-fc99-4d24-87ff-4f67d921cb23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Block">
+      <UniqueIdentifier>{2c432556-82b5-4662-bd14-7ff52be8b152}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Input\ConsoleKeyboardInput.cpp">
+      <Filter>Game\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameManager.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Object\IShapedBlock.cpp">
+      <Filter>Game\Object\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Object\LShapedBlock.cpp">
+      <Filter>Game\Object\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Object\NShapedBlock.cpp">
+      <Filter>Game\Object\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Object\RectShapedBlock.cpp">
+      <Filter>Game\Object\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Object\TShapedBlock.cpp">
+      <Filter>Game\Object\Block</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Game\Input\ConsoleKeyboardInput.h">
+      <Filter>Game\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameManager.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\ErrorDefine.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Object\GameObjectBase.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Util.hpp">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Object\BlockConst.h">
+      <Filter>Game\Object\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Object\BlockBase.h">
+      <Filter>Game\Object\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Object\IShapedBlock.h">
+      <Filter>Game\Object\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Object\LShapedBlock.h">
+      <Filter>Game\Object\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Object\NShapedBlock.h">
+      <Filter>Game\Object\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Object\RectShapedBlock.h">
+      <Filter>Game\Object\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Object\TShapedBlock.h">
+      <Filter>Game\Object\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Object\ShapedBlockFatory.h">
+      <Filter>Game\Object\Block</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
