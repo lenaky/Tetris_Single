@@ -68,6 +68,8 @@ namespace TETRIS
             }
         }
 
+        std::list<BLOCK>& GetBlockList() { return _shape_position; }
+
     protected:
         void AddBlock( BLOCK const& pos )
         {

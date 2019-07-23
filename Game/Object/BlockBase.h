@@ -43,12 +43,32 @@ namespace TETRIS
         
         void OnMoveLeft()
         {
+            auto& block_list = GetBlockList();
+            for( auto& itr = block_list.begin(); itr != block_list.end(); itr++ )
+            {
+                GotoPosition( *itr );
+                std::cout << " "; // 기존거 삭제하고 
+            }
 
+            for( auto& itr = block_list.begin(); itr != block_list.end(); itr++ )
+            {
+                itr->x_ = itr->x_ - 2;
+            }
         }
 
         void OnMoveRight()
         {
+            auto& block_list = GetBlockList();
+            for( auto& itr = block_list.begin(); itr != block_list.end(); itr++ )
+            {
+                GotoPosition( *itr );
+                std::cout << " "; // 기존거 삭제하고 
+            }
 
+            for( auto& itr = block_list.begin(); itr != block_list.end(); itr++ )
+            {
+                itr->x_ = itr->x_ + 2;
+            }
         }
 
         void OnMoveDown()
