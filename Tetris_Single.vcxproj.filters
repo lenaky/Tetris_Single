@@ -43,6 +43,12 @@
     <ClCompile Include="Game\Object\TShapedBlock.cpp">
       <Filter>Game\Object\Block</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Object\RevLShapedBlock.cpp">
+      <Filter>Game\Object\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Object\RevNShapedBlock.cpp">
+      <Filter>Game\Object\Block</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Input\ConsoleKeyboardInput.h">
@@ -82,6 +88,12 @@
       <Filter>Game\Object\Block</Filter>
     </ClInclude>
     <ClInclude Include="Game\Object\ShapedBlockFatory.h">
+      <Filter>Game\Object\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Object\RevLShapedBlock.h">
+      <Filter>Game\Object\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Object\RevNShapedBlock.h">
       <Filter>Game\Object\Block</Filter>
     </ClInclude>
   </ItemGroup>

@@ -100,12 +100,10 @@ namespace TETRIS
             if( nullptr == GetWorkingBlock() )
             {
                 auto rand_val = GetRandom( BLOCK_SHAPE_START, BLOCK_SHAPE_END );
-                //auto shaped_block = CreateGameBlock( rand_val );
-                auto shaped_block = CreateGameBlock( BLOCK_SHAPE_I );
+                auto shaped_block = CreateGameBlock( rand_val );
                 _current_working_block = shaped_block;
             }
 
-            /*
             auto current_tick = std::chrono::system_clock::now();
             if( std::chrono::duration_cast< std::chrono::milliseconds >( current_tick - begin_tick ).count() > 1000 )
             {
@@ -114,7 +112,6 @@ namespace TETRIS
                 begin_tick = current_tick;
                 i++;
             }
-            */
 
             DWORD numEvents = 0;
             GetNumberOfConsoleInputEvents( _input->GetHandle(), &numEvents );

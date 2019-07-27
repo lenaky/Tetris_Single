@@ -116,6 +116,8 @@
     <ClCompile Include="Game\Object\LShapedBlock.cpp" />
     <ClCompile Include="Game\Object\NShapedBlock.cpp" />
     <ClCompile Include="Game\Object\RectShapedBlock.cpp" />
+    <ClCompile Include="Game\Object\RevLShapedBlock.cpp" />
+    <ClCompile Include="Game\Object\RevNShapedBlock.cpp" />
     <ClCompile Include="Game\Object\TShapedBlock.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -130,6 +132,8 @@
     <ClInclude Include="Game\Object\LShapedBlock.h" />
     <ClInclude Include="Game\Object\NShapedBlock.h" />
     <ClInclude Include="Game\Object\RectShapedBlock.h" />
+    <ClInclude Include="Game\Object\RevLShapedBlock.h" />
+    <ClInclude Include="Game\Object\RevNShapedBlock.h" />
     <ClInclude Include="Game\Object\ShapedBlockFatory.h" />
     <ClInclude Include="Game\Object\TShapedBlock.h" />
     <ClInclude Include="Game\Util.hpp" />

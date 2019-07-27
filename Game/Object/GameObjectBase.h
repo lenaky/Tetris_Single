@@ -3,7 +3,7 @@
 
 #include <Windows.h>
 #include <iostream>
-#include <list>
+#include <vector>
 
 namespace TETRIS
 {
@@ -29,10 +29,11 @@ namespace TETRIS
 
     struct BLOCK
     {
-        BLOCK( int x, int y, BLOCK_COLOR color ) : x_( x ), y_( y ), color_( color ) { }
+        BLOCK( int x, int y, bool real_block, BLOCK_COLOR color ) : x_( x ), y_( y ), real_block_( real_block ), color_( color ) { }
         
         int x_ = 0;
         int y_ = 0;
+        bool real_block_ = false;
         BLOCK_COLOR color_ = BLOCK_COLOR_BLACK;
     };
 
@@ -61,14 +62,17 @@ namespace TETRIS
 
         void DrawObject()
         {
-            for( auto& itr = _shape_position.begin(); itr != _shape_position.end(); itr++)
+            for( auto& itr = _shape_position.begin(); itr != _shape_position.end(); itr++ )
             {
-                GotoPosition( { itr->x_, itr->y_, itr->color_ } );
-                std::cout << _a_block_shape << std::endl;
+                if( true == itr->real_block_ )
+                {
+                    GotoPosition( *itr );
+                    std::cout << _a_block_shape << std::endl;
+                }               
             }
         }
 
-        std::list<BLOCK>& GetBlockList() { return _shape_position; }
+        std::vector<BLOCK>& GetBlockList() { return _shape_position; }
 
     protected:
         void AddBlock( BLOCK const& pos )
@@ -88,8 +92,11 @@ namespace TETRIS
         {
             for( auto& itr = _shape_position.begin(); itr != _shape_position.end(); itr++ )
             {
-                GotoPosition( *itr );
-                std::cout << " "; // 기존거 삭제하고 
+                if( true == itr->real_block_ )
+                {
+                    GotoPosition( *itr );
+                    std::cout << " "; // 기존거 삭제하고 
+                }                
             }
 
             for( auto& itr = _shape_position.begin(); itr != _shape_position.end(); itr++ )
@@ -99,7 +106,7 @@ namespace TETRIS
         }
 
     private:
-        std::list<BLOCK> _shape_position;
+        std::vector<BLOCK> _shape_position;
         char const* _a_block_shape = nullptr;
     };
 }

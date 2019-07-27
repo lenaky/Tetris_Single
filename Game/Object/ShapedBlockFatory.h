@@ -6,7 +6,9 @@
 #include "BlockConst.h"
 #include "IShapedBlock.h"
 #include "LShapedBlock.h"
+#include "RevLShapedBlock.h"
 #include "NShapedBlock.h"
+#include "RevNShapedBlock.h"
 #include "RectShapedBlock.h"
 #include "TShapedBlock.h"
 
@@ -24,9 +26,17 @@ namespace TETRIS
             {
                 return std::shared_ptr<TETRIS::LShapedBlock>( new TETRIS::LShapedBlock( TETRIS::BLOCK_COLOR_YELLOW, "бс" ) );
             }
+        case TETRIS::BLOCK_SHAPE_REV_L:
+            {
+                return std::shared_ptr<TETRIS::RevLShapedBlock>( new TETRIS::RevLShapedBlock( TETRIS::BLOCK_COLOR_CYAN, "бс" ) );
+            }
         case TETRIS::BLOCK_SHAPE_N:
             {
                 return std::shared_ptr<TETRIS::NShapedBlock>( new TETRIS::NShapedBlock( TETRIS::BLOCK_COLOR_BROWN, "бс" ) );
+            }
+        case TETRIS::BLOCK_SHAPE_REV_N:
+            {
+                return std::shared_ptr<TETRIS::RevNShapedBlock>( new TETRIS::RevNShapedBlock( TETRIS::BLOCK_COLOR_LIGHTMAGENTA, "бс" ) );
             }
         case TETRIS::BLOCK_SHAPE_RECT:
             {

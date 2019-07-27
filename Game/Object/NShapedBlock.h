@@ -12,8 +12,6 @@ namespace TETRIS
         NShapedBlock( BLOCK_COLOR color, char const* a_block_shape );
         virtual ~NShapedBlock() = default;
 
-        virtual void OnSpin() override;
-
     };
 }
 #endif

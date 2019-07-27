@@ -4,26 +4,29 @@ namespace TETRIS
 {
     RectShapedBlock::RectShapedBlock( BLOCK_COLOR color, char const* a_block_shape ) : BlockBase( color, a_block_shape )
     {
-        {
-            BLOCK block( 0, 0, GetBlockColor() );
-            AddBlock( block );
-        }
-        {
-            BLOCK block( 2, 0, GetBlockColor() );
-            AddBlock( block );
-        }
-        {
-            BLOCK block( 0, 1, GetBlockColor() );
-            AddBlock( block );
-        }
-        {
-            BLOCK block( 2, 1, GetBlockColor() );
-            AddBlock( block );
-        }
-    }
+        _SetSize( 2, 2 );
 
-    void RectShapedBlock::OnSpin()
-    {
+        for( auto& itr : GetBlockList() )
+        {
+            if( itr.x_ == 0 && itr.y_ == 0 )
+            {
+                itr.real_block_ = true;
+            }
 
+            if( itr.x_ == 2 && itr.y_ == 0 )
+            {
+                itr.real_block_ = true;
+            }
+
+            if( itr.x_ == 0 && itr.y_ == 1 )
+            {
+                itr.real_block_ = true;
+            }
+
+            if( itr.x_ == 2 && itr.y_ == 1 )
+            {
+                itr.real_block_ = true;
+            }
+        }
     }
 }

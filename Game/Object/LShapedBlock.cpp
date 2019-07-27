@@ -4,26 +4,29 @@ namespace TETRIS
 {
     LShapedBlock::LShapedBlock( BLOCK_COLOR color, char const* a_block_shape ) : BlockBase( color, a_block_shape )
     {
-        {
-            BLOCK block( 2, 0, GetBlockColor() );
-            AddBlock( block );
-        }
-        {
-            BLOCK block( 2, 1, GetBlockColor() );
-            AddBlock( block );
-        }
-        {
-            BLOCK block( 2, 2, GetBlockColor() );
-            AddBlock( block );
-        }
-        {
-            BLOCK block( 4, 2, GetBlockColor() );
-            AddBlock( block );
-        }
-    }
+        _SetSize( 3, 3 );
 
-    void LShapedBlock::OnSpin()
-    {
+        for( auto& itr : GetBlockList() )
+        {
+            if( itr.x_ == 2 && itr.y_ == 0 )
+            {
+                itr.real_block_ = true;
+            }
 
+            if( itr.x_ == 2 && itr.y_ == 1 )
+            {
+                itr.real_block_ = true;
+            }
+
+            if( itr.x_ == 2 && itr.y_ == 2 )
+            {
+                itr.real_block_ = true;
+            }
+
+            if( itr.x_ == 4 && itr.y_ == 2 )
+            {
+                itr.real_block_ = true;
+            }
+        }
     }
 }

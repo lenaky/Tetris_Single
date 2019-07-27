@@ -10,8 +10,10 @@ namespace TETRIS
         BLOCK_SHAPE_T          = 1,
         BLOCK_SHAPE_RECT       = 2,
         BLOCK_SHAPE_L          = 3,
-        BLOCK_SHAPE_N          = 4,
-        BLOCK_SHAPE_END        = BLOCK_SHAPE_N,
+        BLOCK_SHAPE_REV_L      = 4,
+        BLOCK_SHAPE_N          = 5,
+        BLOCK_SHAPE_REV_N      = 6,
+        BLOCK_SHAPE_END        = BLOCK_SHAPE_REV_N,
     };
 }
 #endif

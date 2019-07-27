@@ -12,8 +12,6 @@ namespace TETRIS
         LShapedBlock( BLOCK_COLOR color, char const* a_block_shape );
         virtual ~LShapedBlock() = default;
 
-        virtual void OnSpin() override;
-
     };
 }
 

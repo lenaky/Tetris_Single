@@ -11,9 +11,7 @@ namespace TETRIS
     public:
         RectShapedBlock( BLOCK_COLOR color, char const* a_block_shape );
         virtual ~RectShapedBlock() = default;
-
-        virtual void OnSpin() override;
-
+        virtual void OnSpin() override { }
     };
 }
 
