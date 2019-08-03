@@ -1,7 +1,7 @@
 #ifndef _N_SHAPED_BLOCK_H_
 #define _N_SHAPED_BLOCK_H_
 
-#include "GameObjectBase.h"
+#include "../GameObjectBase.h"
 #include "BlockBase.h"
 
 namespace TETRIS 
@@ -9,7 +9,7 @@ namespace TETRIS
     class NShapedBlock : public BlockBase
     {
     public:
-        NShapedBlock( BLOCK_COLOR color, char const* a_block_shape );
+        NShapedBlock( GameMapPtr const& map, BLOCK_COLOR color, char const* a_block_shape );
         virtual ~NShapedBlock() = default;
 
     };

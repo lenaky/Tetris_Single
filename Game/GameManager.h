@@ -7,7 +7,8 @@
 
 #include "ErrorDefine.h"
 #include "Input/ConsoleKeyboardInput.h"
-#include "Object/BlockBase.h"
+#include "Object/map/GameMapBase.h"
+#include "Object/Block/BlockBase.h"
 
 namespace TETRIS
 {
@@ -40,6 +41,8 @@ namespace TETRIS
         GAME_THREAD_PTR _game_thread = nullptr;
 
         BlockBasePtr _current_working_block = nullptr;
+        GameMapPtr  _game_map = nullptr;
+
     };
 }
 

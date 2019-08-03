@@ -4,8 +4,8 @@
 #include "GameManager.h"
 #include "Util.hpp"
 #include "Input/ConsoleKeyboardInput.h"
-#include "Object/BlockConst.h"
-#include "Object/ShapedBlockFatory.h"
+#include "Object/Block/BlockConst.h"
+#include "Object/Block/ShapedBlockFatory.h"
 
 namespace TETRIS
 {
@@ -30,6 +30,12 @@ namespace TETRIS
             std::cout << "start failed. error=" << result;
             return result;
         }
+
+        HANDLE consoleHandle = GetStdHandle( STD_OUTPUT_HANDLE );
+        CONSOLE_CURSOR_INFO info;
+        info.dwSize = 100;
+        info.bVisible = FALSE;
+        SetConsoleCursorInfo( consoleHandle, &info );
 
         _run = true;
         _game_thread = GAME_THREAD_PTR( new std::thread( std::bind( &GameManager::GameThread, this ) ) );
@@ -58,18 +64,27 @@ namespace TETRIS
             switch( ker.wVirtualKeyCode )
             {
             case VK_LEFT:
-                GetWorkingBlock()->OnMoveLeft();
-                GetWorkingBlock()->DrawObject();
+                if( false == GetWorkingBlock()->CheckCollision( MOVE_LEFT ) )
+                {
+                    GetWorkingBlock()->OnMoveLeft();
+                    GetWorkingBlock()->DrawObject();
+                }                
                 break;
             case VK_RIGHT:
-                GetWorkingBlock()->OnMoveRight();
-                GetWorkingBlock()->DrawObject();
+                if( false == GetWorkingBlock()->CheckCollision( MOVE_RIGHT ) )
+                {
+                    GetWorkingBlock()->OnMoveRight();
+                    GetWorkingBlock()->DrawObject();
+                }
                 break;
             case VK_DOWN:
-                GetWorkingBlock()->OnMoveDown();
-                GetWorkingBlock()->DrawObject();
+                if( false == GetWorkingBlock()->CheckCollision( MOVE_DOWN ) )
+                {
+                    GetWorkingBlock()->OnMoveDown();
+                    GetWorkingBlock()->DrawObject();
+                }                
                 break;
-            case VK_SHIFT:
+            case VK_UP:
                 GetWorkingBlock()->OnSpin();
                 GetWorkingBlock()->DrawObject();
                 break;
@@ -86,31 +101,37 @@ namespace TETRIS
         DWORD cNumRead;
         INPUT_RECORD irInBuf[ 128 ];
 
+        _game_map = GameMapPtr( new GameMapBase( { 12, 21 }, "бс" ) );
+        _game_map->DrawObject();
+
         auto begin_tick = std::chrono::system_clock::now();
 
-        int i = 0;
         while( _run )
         {
-            if( i == 20 )
-            {
-                _current_working_block = nullptr;
-                i = 0;
-            }
-
+            std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
             if( nullptr == GetWorkingBlock() )
             {
                 auto rand_val = GetRandom( BLOCK_SHAPE_START, BLOCK_SHAPE_END );
-                auto shaped_block = CreateGameBlock( rand_val );
+                auto shaped_block = CreateGameBlock( _game_map, rand_val );
                 _current_working_block = shaped_block;
             }
 
             auto current_tick = std::chrono::system_clock::now();
             if( std::chrono::duration_cast< std::chrono::milliseconds >( current_tick - begin_tick ).count() > 1000 )
             {
-                GetWorkingBlock()->OnMoveDown();
-                GetWorkingBlock()->DrawObject();
-                begin_tick = current_tick;
-                i++;
+                if( false == _current_working_block->CheckCollision( MOVE_DOWN ) )
+                {
+                    GetWorkingBlock()->OnMoveDown();
+                    GetWorkingBlock()->DrawObject();
+                    begin_tick = current_tick;
+                }
+                else
+                {
+                    _game_map->MergeBlock( _current_working_block.get() );
+                    _current_working_block = nullptr;
+                    begin_tick = current_tick;
+                    continue;
+                }                
             }
 
             DWORD numEvents = 0;

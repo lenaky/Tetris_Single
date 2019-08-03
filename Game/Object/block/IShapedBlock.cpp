@@ -1,10 +1,10 @@
-#include "RevNShapedBlock.h"
+#include "IShapedBlock.h"
 
-namespace TETRIS{
-
-    RevNShapedBlock::RevNShapedBlock( BLOCK_COLOR color, char const* a_block_shape ) : BlockBase( color, a_block_shape )
+namespace TETRIS 
+{
+    IShapedBlock::IShapedBlock( GameMapPtr const& map, BLOCK_COLOR color, char const* a_block_shape ) : BlockBase( map, color, a_block_shape )
     {
-        _SetSize( 3, 3 );
+        _SetSize( 4, 4 );
 
         for( auto& itr : GetBlockList() )
         {
@@ -13,20 +13,22 @@ namespace TETRIS{
                 itr.real_block_ = true;
             }
 
-            if( itr.x_ == 4 && itr.y_ == 0 )
-            {
-                itr.real_block_ = true;
-            }
-
-            if( itr.x_ == 0 && itr.y_ == 1 )
-            {
-                itr.real_block_ = true;
-            }
-
             if( itr.x_ == 2 && itr.y_ == 1 )
             {
                 itr.real_block_ = true;
             }
+
+            if( itr.x_ == 2 && itr.y_ == 2 )
+            {
+                itr.real_block_ = true;
+            }
+
+            if( itr.x_ == 2 && itr.y_ == 3 )
+            {
+                itr.real_block_ = true;
+            }
         }
+
+        _AdjustStartPosition();
     }
 }

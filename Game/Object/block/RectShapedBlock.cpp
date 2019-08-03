@@ -2,7 +2,7 @@
 
 namespace TETRIS
 {
-    RectShapedBlock::RectShapedBlock( BLOCK_COLOR color, char const* a_block_shape ) : BlockBase( color, a_block_shape )
+    RectShapedBlock::RectShapedBlock( GameMapPtr const& map, BLOCK_COLOR color, char const* a_block_shape ) : BlockBase( map, color, a_block_shape )
     {
         _SetSize( 2, 2 );
 
@@ -28,5 +28,7 @@ namespace TETRIS
                 itr.real_block_ = true;
             }
         }
+
+        _AdjustStartPosition();
     }
 }

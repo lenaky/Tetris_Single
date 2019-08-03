@@ -17,6 +17,9 @@
     <Filter Include="Game\Object\Block">
       <UniqueIdentifier>{2c432556-82b5-4662-bd14-7ff52be8b152}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Object\Map">
+      <UniqueIdentifier>{27aa5d8c-27c6-4353-95b3-4feaaed8df6a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -28,25 +31,31 @@
     <ClCompile Include="Game\GameManager.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Object\IShapedBlock.cpp">
+    <ClCompile Include="Game\Object\block\IShapedBlock.cpp">
       <Filter>Game\Object\Block</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Object\LShapedBlock.cpp">
+    <ClCompile Include="Game\Object\block\LShapedBlock.cpp">
       <Filter>Game\Object\Block</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Object\NShapedBlock.cpp">
+    <ClCompile Include="Game\Object\block\NShapedBlock.cpp">
       <Filter>Game\Object\Block</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Object\RectShapedBlock.cpp">
+    <ClCompile Include="Game\Object\block\RectShapedBlock.cpp">
       <Filter>Game\Object\Block</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Object\TShapedBlock.cpp">
+    <ClCompile Include="Game\Object\block\RevLShapedBlock.cpp">
       <Filter>Game\Object\Block</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Object\RevLShapedBlock.cpp">
+    <ClCompile Include="Game\Object\block\RevNShapedBlock.cpp">
       <Filter>Game\Object\Block</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Object\RevNShapedBlock.cpp">
+    <ClCompile Include="Game\Object\block\TShapedBlock.cpp">
+      <Filter>Game\Object\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Object\map\GameMapBase.cpp">
+      <Filter>Game\Object\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Object\block\BlockBase.cpp">
       <Filter>Game\Object\Block</Filter>
     </ClCompile>
   </ItemGroup>
@@ -66,35 +75,38 @@
     <ClInclude Include="Game\Util.hpp">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Object\BlockConst.h">
+    <ClInclude Include="Game\Object\block\BlockBase.h">
       <Filter>Game\Object\Block</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Object\BlockBase.h">
+    <ClInclude Include="Game\Object\block\BlockConst.h">
       <Filter>Game\Object\Block</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Object\IShapedBlock.h">
+    <ClInclude Include="Game\Object\block\IShapedBlock.h">
       <Filter>Game\Object\Block</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Object\LShapedBlock.h">
+    <ClInclude Include="Game\Object\block\LShapedBlock.h">
       <Filter>Game\Object\Block</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Object\NShapedBlock.h">
+    <ClInclude Include="Game\Object\block\NShapedBlock.h">
       <Filter>Game\Object\Block</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Object\RectShapedBlock.h">
+    <ClInclude Include="Game\Object\block\RectShapedBlock.h">
       <Filter>Game\Object\Block</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Object\TShapedBlock.h">
+    <ClInclude Include="Game\Object\block\RevLShapedBlock.h">
       <Filter>Game\Object\Block</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Object\ShapedBlockFatory.h">
+    <ClInclude Include="Game\Object\block\RevNShapedBlock.h">
       <Filter>Game\Object\Block</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Object\RevLShapedBlock.h">
+    <ClInclude Include="Game\Object\block\ShapedBlockFatory.h">
       <Filter>Game\Object\Block</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Object\RevNShapedBlock.h">
+    <ClInclude Include="Game\Object\block\TShapedBlock.h">
       <Filter>Game\Object\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Object\map\GameMapBase.h">
+      <Filter>Game\Object\Map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

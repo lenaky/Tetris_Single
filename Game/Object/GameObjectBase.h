@@ -4,6 +4,7 @@
 #include <Windows.h>
 #include <iostream>
 #include <vector>
+#include <memory>
 
 namespace TETRIS
 {
@@ -50,17 +51,22 @@ namespace TETRIS
 
         }
 
-        GameObjectBase& operator+( GameObjectBase& rhs )
+        void AddBlock( BLOCK const& pos )
         {
-            for( auto itr = rhs._shape_position.begin(); itr != rhs._shape_position.end(); itr++ )
-            {
-                this->_shape_position.push_back( *itr );
-            }
-
-            return *this;
+            _shape_position.push_back( pos );
         }
 
-        void DrawObject()
+        void MergeBlock( GameObjectBase* target )
+        {
+            target->For_Each_Block( [ this ]( TETRIS::BLOCK& block ){
+                if( true == block.real_block_ )
+                {
+                    _shape_position.push_back( block );
+                }                
+            } );            
+        }
+
+        virtual void DrawObject() const
         {
             for( auto& itr = _shape_position.begin(); itr != _shape_position.end(); itr++ )
             {
@@ -72,14 +78,19 @@ namespace TETRIS
             }
         }
 
+        template <typename TFunc>
+        void For_Each_Block( TFunc& func )
+        {
+            for( auto& item : _shape_position )
+            {
+                func( item );
+            }
+        }
+
         std::vector<BLOCK>& GetBlockList() { return _shape_position; }
 
     protected:
-        void AddBlock( BLOCK const& pos )
-        {
-            _shape_position.push_back( pos );
-        }
-
+        
         void GotoPosition( BLOCK const& block ) const
         {
             COORD Cur;
@@ -88,27 +99,12 @@ namespace TETRIS
             SetConsoleCursorPosition( GetStdHandle( STD_OUTPUT_HANDLE ), Cur );
         };
 
-        void OnBlockDown()
-        {
-            for( auto& itr = _shape_position.begin(); itr != _shape_position.end(); itr++ )
-            {
-                if( true == itr->real_block_ )
-                {
-                    GotoPosition( *itr );
-                    std::cout << " "; // 기존거 삭제하고 
-                }                
-            }
-
-            for( auto& itr = _shape_position.begin(); itr != _shape_position.end(); itr++ )
-            {
-                itr->y_ = itr->y_ + 1;
-            }
-        }
-
-    private:
+    protected:
         std::vector<BLOCK> _shape_position;
         char const* _a_block_shape = nullptr;
     };
+
+    using GameObjectBasePtr = std::shared_ptr<GameObjectBase>;
 }
 
 #endif

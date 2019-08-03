@@ -1,8 +1,8 @@
-#include "LShapedBlock.h"
+#include "RevLShapedBlock.h"
 
 namespace TETRIS
 {
-    LShapedBlock::LShapedBlock( BLOCK_COLOR color, char const* a_block_shape ) : BlockBase( color, a_block_shape )
+    RevLShapedBlock::RevLShapedBlock( GameMapPtr const& map, BLOCK_COLOR color, char const* a_block_shape ) : BlockBase( map, color, a_block_shape )
     {
         _SetSize( 3, 3 );
 
@@ -23,10 +23,12 @@ namespace TETRIS
                 itr.real_block_ = true;
             }
 
-            if( itr.x_ == 4 && itr.y_ == 2 )
+            if( itr.x_ == 0 && itr.y_ == 2 )
             {
                 itr.real_block_ = true;
             }
         }
+
+        _AdjustStartPosition();
     }
 }

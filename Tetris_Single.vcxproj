@@ -112,30 +112,33 @@
   <ItemGroup>
     <ClCompile Include="Game\GameManager.cpp" />
     <ClCompile Include="Game\Input\ConsoleKeyboardInput.cpp" />
-    <ClCompile Include="Game\Object\IShapedBlock.cpp" />
-    <ClCompile Include="Game\Object\LShapedBlock.cpp" />
-    <ClCompile Include="Game\Object\NShapedBlock.cpp" />
-    <ClCompile Include="Game\Object\RectShapedBlock.cpp" />
-    <ClCompile Include="Game\Object\RevLShapedBlock.cpp" />
-    <ClCompile Include="Game\Object\RevNShapedBlock.cpp" />
-    <ClCompile Include="Game\Object\TShapedBlock.cpp" />
+    <ClCompile Include="Game\Object\block\BlockBase.cpp" />
+    <ClCompile Include="Game\Object\block\IShapedBlock.cpp" />
+    <ClCompile Include="Game\Object\block\LShapedBlock.cpp" />
+    <ClCompile Include="Game\Object\block\NShapedBlock.cpp" />
+    <ClCompile Include="Game\Object\block\RectShapedBlock.cpp" />
+    <ClCompile Include="Game\Object\block\RevLShapedBlock.cpp" />
+    <ClCompile Include="Game\Object\block\RevNShapedBlock.cpp" />
+    <ClCompile Include="Game\Object\block\TShapedBlock.cpp" />
+    <ClCompile Include="Game\Object\map\GameMapBase.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\ErrorDefine.h" />
     <ClInclude Include="Game\GameManager.h" />
     <ClInclude Include="Game\Input\ConsoleKeyboardInput.h" />
-    <ClInclude Include="Game\Object\BlockBase.h" />
-    <ClInclude Include="Game\Object\BlockConst.h" />
+    <ClInclude Include="Game\Object\block\BlockBase.h" />
+    <ClInclude Include="Game\Object\block\BlockConst.h" />
+    <ClInclude Include="Game\Object\block\IShapedBlock.h" />
+    <ClInclude Include="Game\Object\block\LShapedBlock.h" />
+    <ClInclude Include="Game\Object\block\NShapedBlock.h" />
+    <ClInclude Include="Game\Object\block\RectShapedBlock.h" />
+    <ClInclude Include="Game\Object\block\RevLShapedBlock.h" />
+    <ClInclude Include="Game\Object\block\RevNShapedBlock.h" />
+    <ClInclude Include="Game\Object\block\ShapedBlockFatory.h" />
+    <ClInclude Include="Game\Object\block\TShapedBlock.h" />
     <ClInclude Include="Game\Object\GameObjectBase.h" />
-    <ClInclude Include="Game\Object\IShapedBlock.h" />
-    <ClInclude Include="Game\Object\LShapedBlock.h" />
-    <ClInclude Include="Game\Object\NShapedBlock.h" />
-    <ClInclude Include="Game\Object\RectShapedBlock.h" />
-    <ClInclude Include="Game\Object\RevLShapedBlock.h" />
-    <ClInclude Include="Game\Object\RevNShapedBlock.h" />
-    <ClInclude Include="Game\Object\ShapedBlockFatory.h" />
-    <ClInclude Include="Game\Object\TShapedBlock.h" />
+    <ClInclude Include="Game\Object\map\GameMapBase.h" />
     <ClInclude Include="Game\Util.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

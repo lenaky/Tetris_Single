@@ -2,7 +2,7 @@
 
 namespace TETRIS{
 
-    NShapedBlock::NShapedBlock( BLOCK_COLOR color, char const* a_block_shape ) : BlockBase( color, a_block_shape )
+    NShapedBlock::NShapedBlock( GameMapPtr const& map, BLOCK_COLOR color, char const* a_block_shape ) : BlockBase( map, color, a_block_shape )
     {
         _SetSize( 3, 3 );
 
@@ -28,5 +28,7 @@ namespace TETRIS{
                 itr.real_block_ = true;
             }
         }
+
+        _AdjustStartPosition();
     }
 }
