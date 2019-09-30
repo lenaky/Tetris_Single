@@ -144,18 +144,32 @@ namespace TETRIS
             }
         } // 전체 배열 90도 회전. real_block 정보만 얻어간다.
 
-        for( int i = 0; i < block_list.size(); i++ )
+
+        std::vector<BLOCK> tmp_block_list( block_list );
+
+        for( int i = 0; i < tmp_block_list.size(); i++ )
         {
-            block_list[ i ].real_block_ = false;
-            block_list[ i ].real_block_ = spined[ i ].real_block_;
+            tmp_block_list[ i ].real_block_ = false;
+            tmp_block_list[ i ].real_block_ = spined[ i ].real_block_;
         } // real_block 정보 갱신
 
         int collision_factor = 0;
+        bool swap = true;
 
-        while( true == GetMap()->CheckMapCollision( block_list, collision_factor ) )
+        while( true == GetMap()->CheckMapCollision( tmp_block_list, collision_factor ) )
         {
-            CorrectBlocks( block_list, collision_factor );
+            CorrectBlocks( tmp_block_list, collision_factor );
+            if( MAP_FACTOR_INSIDE == collision_factor )
+            {
+                swap = false;
+                break;
+            }
         }
+
+        if( swap )
+        {
+            block_list.swap( tmp_block_list );
+        }        
     }
 
     void BlockBase::_SetSize( int width, int height )
@@ -198,6 +212,11 @@ namespace TETRIS
 
     void BlockBase::CorrectBlocks( OUT std::vector<BLOCK>& blocks, int collision_factor )
     {
+        if( collision_factor & MAP_FACTOR_INSIDE ) // 다른 블록때문에 걸리는 경우는 무시하자.
+        {
+            return;
+        }
+
         if( collision_factor & MAP_FACTOR_LEFTLINE )
         {
             for( auto& block : blocks )
