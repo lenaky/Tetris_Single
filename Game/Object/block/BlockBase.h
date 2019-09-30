@@ -28,13 +28,17 @@ namespace TETRIS
         void OnMoveLeft();
         void OnMoveRight();
         void OnMoveDown();
+        void OnPushBottom();
         virtual void OnSpin();
+
+        void CorrectBlocks( OUT std::vector<BLOCK>& blocks, int collision_factor );
 
         GameMapPtr const& GetMap() const { return _map_ref; }
 
     protected:
         void _SetSize( int width, int height );
         void _AdjustStartPosition();
+        void _ClearPreviousBlockList();
 
     private:
         BLOCK_COLOR _color = BLOCK_COLOR_BLACK;

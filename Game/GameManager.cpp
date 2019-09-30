@@ -88,6 +88,10 @@ namespace TETRIS
                 GetWorkingBlock()->OnSpin();
                 GetWorkingBlock()->DrawObject();
                 break;
+            case VK_SPACE:
+                GetWorkingBlock()->OnPushBottom();
+                GetWorkingBlock()->DrawObject();
+                break;
             case VK_ESCAPE:
                 Stop();
                 std::cout << "game exit...." << std::endl;

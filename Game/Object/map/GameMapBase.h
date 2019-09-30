@@ -6,6 +6,15 @@
 
 namespace TETRIS
 {
+    enum MapFactor : int
+    {
+        MAP_FACTOR_NONE         = 0,
+        MAP_FACTOR_LEFTLINE     = 1 << 0,
+        MAP_FACTOR_RIGHTLINE    = 1 << 1 ,
+        MAP_FACTOR_BOTTOMLINE   = 1 << 2 ,
+        MAP_FACTOR_INSIDE       = 1 << 3 ,
+    };
+
     struct MapSize
     {
         MapSize( int width, int height ) : width_( width ), height_( height ) { }
@@ -25,6 +34,8 @@ namespace TETRIS
         {
             return _map_size;
         }
+
+        bool CheckMapCollision( std::vector<BLOCK> const& blocks, OUT int& collision_factor );
 
     private:
         MapSize _map_size;

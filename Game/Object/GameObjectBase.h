@@ -31,11 +31,14 @@ namespace TETRIS
     struct BLOCK
     {
         BLOCK( int x, int y, bool real_block, BLOCK_COLOR color ) : x_( x ), y_( y ), real_block_( real_block ), color_( color ) { }
+        BLOCK( int x, int y, bool real_block, BLOCK_COLOR color, int factor ) : x_( x ), y_( y ), real_block_( real_block ), color_( color ), factor_( factor ) { }
         
         int x_ = 0;
         int y_ = 0;
         bool real_block_ = false;
         BLOCK_COLOR color_ = BLOCK_COLOR_BLACK;
+
+        int factor_ = 0;
     };
 
     class GameObjectBase

@@ -73,15 +73,9 @@ namespace TETRIS
         
     void BlockBase::OnMoveLeft()
     {
+        _ClearPreviousBlockList();
+
         auto& block_list = GetBlockList();
-        for( auto& itr = block_list.begin(); itr != block_list.end(); itr++ )
-        {
-            if( true == itr->real_block_ )
-            {
-                GotoPosition( *itr );
-                std::cout << " "; // 기존거 삭제하고 
-            }                
-        }
 
         for( auto& itr = block_list.begin(); itr != block_list.end(); itr++ )
         {
@@ -91,15 +85,9 @@ namespace TETRIS
 
     void BlockBase::OnMoveRight()
     {
+        _ClearPreviousBlockList();
+
         auto& block_list = GetBlockList();
-        for( auto& itr = block_list.begin(); itr != block_list.end(); itr++ )
-        {
-            if( true == itr->real_block_ )
-            {
-                GotoPosition( *itr );
-                std::cout << " "; // 기존거 삭제하고 
-            }                
-        }
 
         for( auto& itr = block_list.begin(); itr != block_list.end(); itr++ )
         {
@@ -109,14 +97,9 @@ namespace TETRIS
 
     void BlockBase::OnMoveDown()
     {
-        for( auto& itr = _shape_position.begin(); itr != _shape_position.end(); itr++ )
-        {
-            if( true == itr->real_block_ )
-            {
-                GotoPosition( *itr );
-                std::cout << " "; // 기존거 삭제하고 
-            }
-        }
+        _ClearPreviousBlockList();
+
+        auto& block_list = GetBlockList();
 
         for( auto& itr = _shape_position.begin(); itr != _shape_position.end(); itr++ )
         {
@@ -124,27 +107,39 @@ namespace TETRIS
         }
     }
 
-    void BlockBase::OnSpin()
+    void BlockBase::OnPushBottom()
     {
+        _ClearPreviousBlockList();
+
         auto& block_list = GetBlockList();
-        for( auto& itr = block_list.begin(); itr != block_list.end(); itr++ )
+        int collision_factor = 0;
+
+        while( false == GetMap()->CheckMapCollision( block_list, collision_factor ) )
         {
-            if( true == itr->real_block_ )
+            for( auto& itr = block_list.begin(); itr != block_list.end(); itr++ )
             {
-                GotoPosition( *itr );
-                std::cout << " "; // 기존거 삭제하고 
+                itr->y_ = itr->y_ + 1;
             }
         }
 
+        CorrectBlocks( block_list, MAP_FACTOR_BOTTOMLINE );
+    }
+
+    void BlockBase::OnSpin()
+    {
+        _ClearPreviousBlockList();
+
+        auto& block_list = GetBlockList();
+
         // 충돌 보정작업. 왼쪽에 붙어있을때, 오른쪽에 붙어있을때, 바닥에 붙어있을때에 대한 계산 필요함
-            
+
         std::vector<BLOCK> spined;
 
         for( int x = 0; x < _width; x++ )
         {
             for( int y = 0; y < _height; y++ )
             {
-                auto& block_val = block_list[ (y + 1) * _height - (x + 1) ];
+                auto& block_val = block_list[ ( y + 1 ) * _height - ( x + 1 ) ];
                 spined.push_back( block_val );
             }
         } // 전체 배열 90도 회전. real_block 정보만 얻어간다.
@@ -155,6 +150,12 @@ namespace TETRIS
             block_list[ i ].real_block_ = spined[ i ].real_block_;
         } // real_block 정보 갱신
 
+        int collision_factor = 0;
+
+        while( true == GetMap()->CheckMapCollision( block_list, collision_factor ) )
+        {
+            CorrectBlocks( block_list, collision_factor );
+        }
     }
 
     void BlockBase::_SetSize( int width, int height )
@@ -167,7 +168,7 @@ namespace TETRIS
         {
             for( int y = 0; y < _height; y++ )
             {
-                BLOCK block( x * 2, y, false, GetBlockColor() );
+                BLOCK block( x * 2, y, false, GetBlockColor(), MAP_FACTOR_INSIDE );
                 AddBlock( block );
             }
         }
@@ -180,6 +181,46 @@ namespace TETRIS
         For_Each_Block( [ offset ]( TETRIS::BLOCK& block ){
             block.x_ += offset;
         } );
+    }
+
+    void BlockBase::_ClearPreviousBlockList()
+    {
+        auto& block_list = GetBlockList();
+        for( auto& itr = block_list.begin(); itr != block_list.end(); itr++ )
+        {
+            if( true == itr->real_block_ )
+            {
+                GotoPosition( *itr );
+                std::cout << " "; // 기존거 삭제하고 
+            }
+        }
+    }
+
+    void BlockBase::CorrectBlocks( OUT std::vector<BLOCK>& blocks, int collision_factor )
+    {
+        if( collision_factor & MAP_FACTOR_LEFTLINE )
+        {
+            for( auto& block : blocks )
+            {
+                block.x_ = block.x_ + 2;
+            }
+        }
+
+        if( collision_factor & MAP_FACTOR_RIGHTLINE )
+        {
+            for( auto& block : blocks )
+            {
+                block.x_ = block.x_ - 2;
+            }
+        }
+
+        if( collision_factor & MAP_FACTOR_BOTTOMLINE )
+        {
+            for( auto& block : blocks )
+            {
+                block.y_ = block.y_ - 1;
+            }
+        }
     }
 }
 
