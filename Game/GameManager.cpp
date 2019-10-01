@@ -132,6 +132,8 @@ namespace TETRIS
                 else
                 {
                     _game_map->MergeBlock( _current_working_block.get() );
+                    _game_map->ScoreBlocks();
+                    _game_map->DrawObject();
                     _current_working_block = nullptr;
                     begin_tick = current_tick;
                     continue;

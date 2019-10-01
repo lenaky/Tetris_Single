@@ -1,4 +1,5 @@
 #include "GameMapBase.h"
+#include <set>
 
 namespace TETRIS 
 {
@@ -42,9 +43,40 @@ namespace TETRIS
             if( true == itr->real_block_ )
             {
                 GotoPosition( *itr );
+                SetConsoleTextAttribute( GetStdHandle( STD_OUTPUT_HANDLE ), itr->color_ );
                 std::cout << _a_block_shape << std::endl;
             }
         }
+    }
+
+    void GameMapBase::ScoreBlocks()
+    {
+        std::set<int> yvalues;
+
+        for( int y = 0; y < _map_size.height_ - 1; y++ )
+        {
+            int x_size = (_map_size.width_ * 2 - 4) / 2; // width 길이 전체 블록 개수
+            for( int x = 2; x <= ( _map_size.width_ * 2 - 4 ); x = x + 2 )
+            {
+                For_Each_Block( [&x_size, &yvalues, x, y]( BLOCK const& block ) {
+
+                    if( true == block.real_block_ )
+                    {
+                        if( block.x_ == x && block.y_ == y )
+                        {
+                            x_size--;
+                        }
+                    }
+                } );
+            }
+
+            if( 0 == x_size )
+            {
+                yvalues.insert( y );
+            }            
+        }
+
+        _SinkBlocks( yvalues );
     }
 
     bool GameMapBase::CheckMapCollision( std::vector<BLOCK> const& blocks, OUT int& collision_factor )
@@ -67,4 +99,52 @@ namespace TETRIS
         return collision_factor == 0 ? false : true;
     }
 
+    void GameMapBase::_SinkBlocks( std::set<int> const& yvalues )
+    {
+        if( 0 == yvalues.size() )
+        {
+            return;
+        }
+
+        auto& blocks = GetBlockList();
+
+        for( auto target_yvalue : yvalues )
+        {
+            for( auto& block_itr = blocks.begin(); block_itr != blocks.end(); )
+            {
+                if( MAP_FACTOR_INSIDE == block_itr->factor_ )
+                {
+                    // 같은 y 높이에 있는 블럭들은 삭제한다.
+                    if( target_yvalue == block_itr->y_ )
+                    {
+                        GotoPosition( *block_itr );
+                        std::cout << " "; // 그려진 것 삭제
+
+                        block_itr = blocks.erase( block_itr );
+                        continue;
+                    }
+                }
+
+                block_itr = block_itr + 1;
+            } 
+
+            for( int move_down_block = target_yvalue - 1; move_down_block > 0; move_down_block-- )
+            {
+                for( auto& block_itr = blocks.begin(); block_itr != blocks.end(); )
+                {
+                    if( MAP_FACTOR_INSIDE == block_itr->factor_ )
+                    {
+                        if (block_itr->y_ == move_down_block )
+                        {
+                            GotoPosition( *block_itr );
+                            std::cout << " "; // 위에 그려진 것들 삭제
+                            block_itr->y_ = block_itr->y_ + 1;
+                        }
+                    }
+
+                    block_itr = block_itr + 1;
+                } // 블록 한칸씩 아래로 내림
+            } 
+        }        
+    }
 }

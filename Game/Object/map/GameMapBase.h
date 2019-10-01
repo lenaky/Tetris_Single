@@ -1,6 +1,7 @@
 #ifndef _GAME_MAP_BASE_H_
 #define _GAME_MAP_BASE_H_
 
+#include <set>
 #include <memory>
 #include "../GameObjectBase.h"
 
@@ -35,9 +36,13 @@ namespace TETRIS
             return _map_size;
         }
 
+        void ScoreBlocks();
+
         bool CheckMapCollision( std::vector<BLOCK> const& blocks, OUT int& collision_factor );
 
     private:
+        void _SinkBlocks(std::set<int> const& yvalues);
+
         MapSize _map_size;
 
     };

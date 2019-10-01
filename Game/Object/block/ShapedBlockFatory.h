@@ -41,7 +41,7 @@ namespace TETRIS
             }
         case TETRIS::BLOCK_SHAPE_RECT:
             {
-                return std::shared_ptr<TETRIS::RectShapedBlock>( new TETRIS::RectShapedBlock( map, TETRIS::BLOCK_COLOR_BLUE, "бс" ) );
+                return std::shared_ptr<TETRIS::RectShapedBlock>( new TETRIS::RectShapedBlock( map, TETRIS::BLOCK_COLOR_LIGHTBLUE, "бс" ) );
             }
         case TETRIS::BLOCK_SHAPE_T:
             {
