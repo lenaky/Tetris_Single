@@ -34,6 +34,19 @@ namespace TETRIS
             return _current_working_block;
         }
 
+        void AddScore( std::int64_t add );
+
+    private:
+        void GotoPosition( int x, int y ) const
+        {
+            COORD Cur;
+            Cur.X = x;
+            Cur.Y = y;
+            SetConsoleCursorPosition( GetStdHandle( STD_OUTPUT_HANDLE ), Cur );
+        };
+
+        void _RefreshScoreBoard();
+
     private :
 
         std::atomic<bool> _run = false;
@@ -42,6 +55,8 @@ namespace TETRIS
 
         BlockBasePtr _current_working_block = nullptr;
         GameMapPtr  _game_map = nullptr;
+
+        std::int64_t _game_score = 0;
 
     };
 }

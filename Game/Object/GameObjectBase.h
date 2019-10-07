@@ -91,6 +91,7 @@ namespace TETRIS
         }
 
         std::vector<BLOCK>& GetBlockList() { return _shape_position; }
+        std::vector<BLOCK> const& GetBlockList() const { return _shape_position; }
 
     protected:
         

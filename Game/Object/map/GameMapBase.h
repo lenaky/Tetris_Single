@@ -36,9 +36,10 @@ namespace TETRIS
             return _map_size;
         }
 
-        void ScoreBlocks();
+        std::int64_t ScoreBlocks();
 
         bool CheckMapCollision( std::vector<BLOCK> const& blocks, OUT int& collision_factor );
+        bool CheckGameEnd( GameObjectBase* target ) const;
 
     private:
         void _SinkBlocks(std::set<int> const& yvalues);

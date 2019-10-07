@@ -49,7 +49,7 @@ namespace TETRIS
         }
     }
 
-    void GameMapBase::ScoreBlocks()
+    std::int64_t GameMapBase::ScoreBlocks()
     {
         std::set<int> yvalues;
 
@@ -77,6 +77,8 @@ namespace TETRIS
         }
 
         _SinkBlocks( yvalues );
+
+        return yvalues.size();
     }
 
     bool GameMapBase::CheckMapCollision( std::vector<BLOCK> const& blocks, OUT int& collision_factor )
@@ -146,5 +148,25 @@ namespace TETRIS
                 } // 블록 한칸씩 아래로 내림
             } 
         }        
+    }
+
+    bool GameMapBase::CheckGameEnd( GameObjectBase* target ) const
+    {
+        bool collision = false;
+        auto const& blocks = GetBlockList();
+
+        target->For_Each_Block( [ &blocks, &collision ]( BLOCK& target_each_block ) {
+            for( auto const& block : blocks )
+            {
+                if( target_each_block.x_ == block.x_ &&
+                    target_each_block.y_ == block.y_ &&
+                    target_each_block.real_block_ == true )
+                {
+                    collision = true;
+                }
+            }
+        } );       
+
+        return collision == true ? true : false;
     }
 }

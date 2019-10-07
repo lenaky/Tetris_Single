@@ -191,7 +191,7 @@ namespace TETRIS
     void BlockBase::_AdjustStartPosition()
     {
         int offset = 0;
-        offset = GetMap()->GetMapSize().width_ / 2;
+        offset = GetMap()->GetMapSize().width_ / 2 + 2;
         For_Each_Block( [ offset ]( TETRIS::BLOCK& block ){
             block.x_ += offset;
         } );

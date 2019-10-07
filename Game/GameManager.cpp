@@ -1,5 +1,6 @@
 #include <iostream>
 #include <chrono>
+#include <sstream>
 
 #include "GameManager.h"
 #include "Util.hpp"
@@ -108,6 +109,8 @@ namespace TETRIS
         _game_map = GameMapPtr( new GameMapBase( { 12, 21 }, "﹥" ) );
         _game_map->DrawObject();
 
+        AddScore( 0 );
+
         auto begin_tick = std::chrono::system_clock::now();
 
         while( _run )
@@ -118,6 +121,13 @@ namespace TETRIS
                 auto rand_val = GetRandom( BLOCK_SHAPE_START, BLOCK_SHAPE_END );
                 auto shaped_block = CreateGameBlock( _game_map, rand_val );
                 _current_working_block = shaped_block;
+
+                if( true == _game_map->CheckGameEnd( _current_working_block.get() ) )
+                {
+                    exit( 0 );
+                }
+
+                GetWorkingBlock()->DrawObject();
             }
 
             auto current_tick = std::chrono::system_clock::now();
@@ -132,7 +142,7 @@ namespace TETRIS
                 else
                 {
                     _game_map->MergeBlock( _current_working_block.get() );
-                    _game_map->ScoreBlocks();
+                    AddScore( _game_map->ScoreBlocks() );
                     _game_map->DrawObject();
                     _current_working_block = nullptr;
                     begin_tick = current_tick;
@@ -163,9 +173,40 @@ namespace TETRIS
                 {
                 case KEY_EVENT:
                     KeyEventProc( irInBuf[ i ].Event.KeyEvent );
+                    if( irInBuf[ i ].Event.KeyEvent.bKeyDown == TRUE && 
+                        irInBuf[i].Event.KeyEvent.wVirtualKeyCode == VK_SPACE )
+                    {
+                        _game_map->MergeBlock( _current_working_block.get() );
+                        AddScore( _game_map->ScoreBlocks() );
+                        _game_map->DrawObject();
+                        _current_working_block = nullptr;
+                        begin_tick = current_tick;
+                    }
                     break;
                 }
             }
         }
+    }
+
+    void GameManager::AddScore( std::int64_t add )
+    {
+        _game_score += add * 100;
+        _RefreshScoreBoard();
+    }
+
+    void GameManager::_RefreshScoreBoard()
+    {
+        GotoPosition( 24, 0 );
+        SetConsoleTextAttribute( GetStdHandle( STD_OUTPUT_HANDLE ), BLOCK_COLOR_WHITE );
+        std::string str = "忙式式式式式式式式式式式式式式式式式式式式忖 ";
+        std::cout << str << std::endl;
+        GotoPosition( 24, 1 );
+        str = "弛                    弛 ";
+        std::cout << str << std::endl;
+        GotoPosition( 24, 2 );
+        str = "戌式式式式式式式式式式式式式式式式式式式式戎 ";
+        std::cout << str << std::endl;       
+        GotoPosition( 30, 1 );
+        std::cout << "SCORE : " << _game_score << std::endl;
     }
 }
