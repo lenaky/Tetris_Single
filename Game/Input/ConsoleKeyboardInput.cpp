@@ -33,34 +33,4 @@ namespace TETRIS
 
         return TETRIS_ERROR_NONE;
     }
-
-    /*
-    void ConsoleKeyboardInput::ListenKeyboard( ConsoleKeyboardInput* instance )
-    {
-        DWORD cNumRead;
-        INPUT_RECORD irInBuf[ 128 ];
-
-        while( instance->GetRunState() )
-        {
-            if( !ReadConsoleInput(
-                instance->GetHandle(),
-                irInBuf,
-                128,
-                &cNumRead ) )
-            {
-                continue;
-            }
-
-            for( DWORD i = 0; i < cNumRead; i++ )
-            {
-                switch( irInBuf[ i ].EventType )
-                {
-                case KEY_EVENT:
-                    instance->KeyEventProc( irInBuf[ i ].Event.KeyEvent );
-                    break;
-                }
-            }
-        }
-    }
-    */
 }
